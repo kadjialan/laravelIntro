@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Listing;
@@ -34,7 +34,7 @@ Route::get('/listings/{id}', function($id) {
 
 
 // added by me for trials
-Route::get('/free', function () {
+/* Route::get('/free', function () {
     return response('<h1>welcome kadji<h1>');
 });
 
@@ -45,4 +45,12 @@ Route::get('/post/{id}', function ($id) {
 
 Route::get('/search', function (Request $request) {
     dd($request);
-});
+}); */
+
+
+Route::get('/product', [ProductController::class, 'index']) -> name('product.index');
+Route::get('/product/create', [ProductController::class, 'create']) -> name('product.create');
+Route::post ('/product', [ProductController::class, 'store']) -> name('product.store'); 
+Route::get('/product/{product}/edit', [ProductController::class, 'edit']) -> name('product.edit');  
+Route::put('/product/{product}/update', [ProductController::class, 'update']) -> name('product.update');  
+Route::delete('/product/{product}/delete', [ProductController::class, 'delete']) -> name('product.delete');
